@@ -38,6 +38,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="460dp"
         android:layout_marginBottom="10dp"
+        android:onClick="onClickLadder"
         android:text="Ladder Game"
         app:layout_constraintBottom_toTopOf="@+id/roulette"
         app:layout_constraintEnd_toEndOf="@+id/roulette"
