@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".RouletteActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
