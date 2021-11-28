@@ -10,8 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeGames">
         <activity
-            android:name=".LadderPlay"
+            android:name=".LadderResult"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="ladderResult" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LadderPlay"
+            android:exported="true">
             <intent-filter>
                 <action android:name="ladderPlay" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class LadderActivity extends AppCompatActivity {
 
-    private int number = 2;
+    public int number = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +34,8 @@ public class LadderActivity extends AppCompatActivity {
         Button plusBtn = findViewById(R.id.plus);
         plusBtn.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
-                if(number>5){
-                    Toast.makeText(getApplicationContext(), "최대 6명까지 할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                if(number>4){
+                    Toast.makeText(getApplicationContext(), "최대 5명까지 할 수 있습니다.", Toast.LENGTH_SHORT).show();
                 } else{
                     number++;
                 }
@@ -47,6 +47,7 @@ public class LadderActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction("ladderPlay");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra("playNum", number);
         startActivity(intent);
     }
 }
