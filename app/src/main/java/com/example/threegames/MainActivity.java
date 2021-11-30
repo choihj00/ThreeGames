@@ -13,21 +13,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button roulette = (Button) findViewById(R.id.roulette);
-        roulette.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RouletteActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void onClickLadder(View v){
         Intent intent = new Intent();
         intent.setAction("ladder");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
+        startActivity(intent);
+    }
+
+    public void onClickRoulette(View v){
+        Intent intent = new Intent(getApplicationContext(), RouletteActivity.class);
         startActivity(intent);
     }
 }

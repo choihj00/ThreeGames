@@ -2,43 +2,47 @@ package com.example.threegames;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class RouletteActivity extends AppCompatActivity {
-    private Button spin, increaseCount, decreaseCount;
-    private TextView resultText, count;
+    private Button increaseButton, decreaseButton, playRoulette;
+    private TextView rouletteCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roulette);
 
-        spin = (Button) findViewById(R.id.spinButton);
-        increaseCount = (Button) findViewById(R.id.decreaseCount);
-        decreaseCount = (Button) findViewById(R.id.increaseCount);
+        increaseButton = (Button) findViewById(R.id.increaseButton);
+        decreaseButton = (Button) findViewById(R.id.decreaseButton);
+        playRoulette = (Button) findViewById(R.id.playRoulette);
 
-        resultText = (TextView) findViewById(R.id.resultText);
-        count = (TextView) findViewById(R.id.count);
+        rouletteCount = (TextView) findViewById(R.id.rouletteCount);
     }
 
     public void increaseCount(View v){
-        int count = Integer.parseInt(this.count.getText().toString());
-        System.out.println(count);
+        int count = Integer.parseInt(this.rouletteCount.getText().toString());
         if(count == 6)
             return;
         count++;
-        this.count.setText(count+"");
+        this.rouletteCount.setText(count+"");
     }
 
     public void decreaseCount(View v){
-        int count = Integer.parseInt(this.count.getText().toString());
+        int count = Integer.parseInt(this.rouletteCount.getText().toString());
         System.out.println(count);
         if(count == 2)
             return;
         count--;
-        this.count.setText(count+"");
+        this.rouletteCount.setText(count+"");
+    }
+
+    public void playRoulette(View v){
+        Intent intent = new Intent(getApplicationContext(), RoulettePlayActivity.class);
+        startActivity(intent);
     }
 }

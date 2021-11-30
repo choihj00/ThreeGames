@@ -63,6 +63,7 @@
         android:layout_width="210dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:onClick="onClickRoulette"
         android:text="Roulette Game"
         app:layout_constraintBottom_toTopOf="@+id/rsp"
         app:layout_constraintEnd_toEndOf="@+id/rsp"

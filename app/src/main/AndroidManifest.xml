@@ -10,10 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeGames">
         <activity
+            android:name=".RoulettePlayActivity"
+            android:exported="true" />
+        <activity
             android:name=".LadderResult"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="ladderResult" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -22,6 +26,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="ladderPlay" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -30,6 +35,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="ladder" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
