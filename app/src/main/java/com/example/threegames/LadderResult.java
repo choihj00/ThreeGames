@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class LadderResult extends AppCompatActivity {
 
     @Override
@@ -17,18 +19,20 @@ public class LadderResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ladder_result);
 
-//        LinearLayout view = findViewById(R.id.resultLayout);
-//
-//        for (int i = 0; i < number; i++) {
-//            TextView textView = new TextView(this);
-//
-//            textView.setId(20+i);
-//
-////            System.out.println(editTextTop.getId());
-//
-//            view.addView(textView);
-//        }
+        TextView resultTextView = findViewById(R.id.resultTextView);
 
+        Intent intent = getIntent();
+        ArrayList<String> arrayTop = intent.getStringArrayListExtra("arrayTop");
+        ArrayList<String> arrayBottom = intent.getStringArrayListExtra("arrayBottom");
+
+        StringBuffer sb = new StringBuffer();
+        for (int i=0;i<arrayTop.size();i++) {
+            sb.append(arrayTop.get(i).toString() + "->");
+            int random = (int)(Math.random()*arrayBottom.size());
+            sb.append(arrayBottom.get(random).toString() + "\r\n");
+            arrayBottom.remove(random);
+        }
+        resultTextView.setText(sb);
     }
 
     public void onClickHome(View v){
