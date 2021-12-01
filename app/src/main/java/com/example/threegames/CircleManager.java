@@ -7,6 +7,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
@@ -64,8 +67,22 @@ public class CircleManager extends View {
             // put text at middle of Arc's center point and Circle's center point
             float textX = (centerX + arcCenterX) / 2;
             float textY = (centerY + arcCenterY) / 2;
+            System.out.println(textX + ", " + textY);
 
-            canvas.drawText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i), textX, textY, paint);
+            EditText et = new EditText(cContext);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            et.setLayoutParams(lp);
+            et.setText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i));
+            et.setId(i);
+            float x = textX+lp.width*30;
+            float y = textY+lp.height*25;
+            System.out.println(x + ", " + y);
+            et.setX(x);
+            et.setY(y);
+            ((RelativeLayout)this.getParent()).addView(et);
+//            canvas.drawText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i), textX, textY, paint);
             temp += sweepAngle;
         }
     }
