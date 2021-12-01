@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ public class CircleManager extends View {
     private int num;
     private Context cContext;
     private String className;
+    private ArrayList<String> options = null;
 
     public CircleManager(Context context, int num, String className) {
         super(context);
@@ -37,14 +40,13 @@ public class CircleManager extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         RelativeLayout layoutRoulette = null;
-        ArrayList<String> STRINGS = null;
         if(className.equals("Roulette")){
             layoutRoulette = ((RouletteActivity)RouletteActivity.rContext).layoutRoulette;
-            STRINGS = ((RouletteActivity)RouletteActivity.rContext).STRINGS;
+            options = ((RouletteActivity)RouletteActivity.rContext).STRINGS;
         }
         else if(className.equals("RoulettePlay")){
             layoutRoulette = ((RoulettePlayActivity)RoulettePlayActivity.mContext).layoutRoulette;
-            STRINGS = ((RoulettePlayActivity)RoulettePlayActivity.mContext).STRINGS;
+            options = ((RoulettePlayActivity)RoulettePlayActivity.mContext).STRINGS;
         }
 
         int width = layoutRoulette.getWidth();
@@ -86,7 +88,7 @@ public class CircleManager extends View {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 et.setLayoutParams(lp);
-                et.setText(STRINGS.get(i));
+                et.setText(options.get(i));
                 et.setId(i);
                 float x = textX+lp.width*30;
                 float y = textY+lp.height*25;
