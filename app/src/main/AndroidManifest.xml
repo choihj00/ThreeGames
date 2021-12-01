@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeGames">
         <activity
+            android:name=".random"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="random" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".RoulettePlayActivity"
             android:exported="true" />
         <activity

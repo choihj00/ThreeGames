@@ -27,9 +27,9 @@ public class LadderResult extends AppCompatActivity {
 
         StringBuffer sb = new StringBuffer();
         for (int i=0;i<arrayTop.size();i++) {
-            sb.append(arrayTop.get(i).toString() + "->");
+            sb.append(arrayTop.get(i).toString() + " -> ");
             int random = (int)(Math.random()*arrayBottom.size());
-            sb.append(arrayBottom.get(random).toString() + "\r\n");
+            sb.append(arrayBottom.get(random).toString() + "\n\r\n");
             arrayBottom.remove(random);
         }
         resultTextView.setText(sb);

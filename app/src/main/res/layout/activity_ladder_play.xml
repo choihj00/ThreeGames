@@ -52,7 +52,7 @@
         android:id="@+id/startBtn"
         android:layout_width="104dp"
         android:layout_height="52dp"
-        android:text="게임 시작!"
+        android:text="결과 확인!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
