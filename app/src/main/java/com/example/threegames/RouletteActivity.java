@@ -42,7 +42,7 @@ public class RouletteActivity extends AppCompatActivity {
         layoutRoulette = (RelativeLayout) findViewById(R.id.roulette);
 
         STRINGS = setOption(count);
-        circleManager = new CircleManager(rContext, count);
+        circleManager = new CircleManager(rContext, count, "Roulette");
         layoutRoulette.addView(circleManager);
     }
 
@@ -64,10 +64,10 @@ public class RouletteActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "최대 6명까지 할 수 있습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
+        for(int i =0;i<count;i++)
+            layoutRoulette.removeView(findViewById(i));
         count++;
         this.rouletteCount.setText(count+"칸");
-        for(int i =0;i<count-1;i++)
-            layoutRoulette.removeView(findViewById(i));
         STRINGS = setOption(count);
         circleManager.setNum(count);
     }
@@ -77,18 +77,19 @@ public class RouletteActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "최소 2명까지 할 수 있습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
+        for(int i =0;i<count;i++)
+            layoutRoulette.removeView(findViewById(i));
         count--;
         this.rouletteCount.setText(count+"칸");
-        layoutRoulette.removeAllViews();
         STRINGS = setOption(count);
-//        circleManager.setNum(count);
-        circleManager = new CircleManager(rContext, count);
-        layoutRoulette.addView(circleManager);
+        circleManager.setNum(count);
     }
 
     public void playRoulette(View v){
         Intent intent = new Intent(getApplicationContext(), RoulettePlayActivity.class);
         intent.putExtra("playCnt", count);
+        intent.putStringArrayListExtra("optionList", STRINGS);
         startActivity(intent);
+        finish();
     }
 }

@@ -19,11 +19,13 @@ public class CircleManager extends View {
     private int[] COLORS = {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA, Color.GRAY};
     private int num;
     private Context cContext;
+    private String className;
 
-    public CircleManager(Context context, int num) {
+    public CircleManager(Context context, int num, String className) {
         super(context);
         cContext = context;
         this.num = num;
+        this.className = className;
     }
 
     public void setNum(int num) {
@@ -34,9 +36,19 @@ public class CircleManager extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        RelativeLayout layoutRoulette = null;
+        ArrayList<String> STRINGS = null;
+        if(className.equals("Roulette")){
+            layoutRoulette = ((RouletteActivity)RouletteActivity.rContext).layoutRoulette;
+            STRINGS = ((RouletteActivity)RouletteActivity.rContext).STRINGS;
+        }
+        else if(className.equals("RoulettePlay")){
+            layoutRoulette = ((RoulettePlayActivity)RoulettePlayActivity.mContext).layoutRoulette;
+            STRINGS = ((RoulettePlayActivity)RoulettePlayActivity.mContext).STRINGS;
+        }
 
-        int width = ((RouletteActivity)RouletteActivity.rContext).layoutRoulette.getWidth();
-        int height = ((RouletteActivity)RouletteActivity.rContext).layoutRoulette.getHeight();
+        int width = layoutRoulette.getWidth();
+        int height = layoutRoulette.getHeight();
         int sweepAngle = 360 / num;
 
         RectF rectF = new RectF(0, 0, width, height);
@@ -67,22 +79,24 @@ public class CircleManager extends View {
             // put text at middle of Arc's center point and Circle's center point
             float textX = (centerX + arcCenterX) / 2;
             float textY = (centerY + arcCenterY) / 2;
-            System.out.println(textX + ", " + textY);
 
-            EditText et = new EditText(cContext);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            et.setLayoutParams(lp);
-            et.setText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i));
-            et.setId(i);
-            float x = textX+lp.width*30;
-            float y = textY+lp.height*25;
-            System.out.println(x + ", " + y);
-            et.setX(x);
-            et.setY(y);
-            ((RelativeLayout)this.getParent()).addView(et);
-//            canvas.drawText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i), textX, textY, paint);
+            if(className.equals("Roulette")){
+                EditText et = new EditText(cContext);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                et.setLayoutParams(lp);
+                et.setText(STRINGS.get(i));
+                et.setId(i);
+                float x = textX+lp.width*30;
+                float y = textY+lp.height*25;
+                et.setX(x);
+                et.setY(y);
+                ((RelativeLayout)this.getParent()).addView(et);
+            }
+            else if(className.equals("RoulettePlay")){
+                canvas.drawText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i), textX, textY, paint);
+            }
             temp += sweepAngle;
         }
     }

@@ -28,7 +28,7 @@ public class RoulettePlayActivity extends AppCompatActivity {
     public ArrayList<String> STRINGS;
     private float initAngle = 0.0f;
 
-    Button spin;
+    Button restart, home;
     TextView result;
 
     @Override
@@ -41,18 +41,28 @@ public class RoulettePlayActivity extends AppCompatActivity {
         int count = intent.getIntExtra("playCnt", 2);
         System.out.println(count);
 
-        spin = (Button) findViewById(R.id.spinButton);
+        restart = (Button) findViewById(R.id.restartBtn);
+        home = (Button) findViewById(R.id.homeBtn);
         result = (TextView) findViewById(R.id.resultText);
         layoutRoulette = (RelativeLayout) findViewById(R.id.roulette);
 
-        STRINGS = setRandom(1000, count);
-        circleManager = new CircleManager(mContext, count);
+        STRINGS = intent.getStringArrayListExtra("optionList");
+        circleManager = new CircleManager(mContext, count, "RoulettePlay");
         layoutRoulette.addView(circleManager);
 
-        spin.setOnClickListener(new View.OnClickListener() {
+        rotateLayout(layoutRoulette, count);
+
+        restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rotateLayout(layoutRoulette, count);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
@@ -77,20 +87,6 @@ public class RoulettePlayActivity extends AppCompatActivity {
         layout.startAnimation(rotateAnimation);
     }
 
-    public ArrayList<String> setRandom(int maxNumber, int num) {
-        ArrayList<String> strings = new ArrayList<>();
-
-        double r = Math.random();
-
-        for (int i = 0; i < num; i++) {
-            int rand = (int) (r * maxNumber);
-            strings.add(String.valueOf(rand));
-            r = Math.random();
-        }
-
-        return strings;
-    }
-
     private int getRandom(int maxNumber) {
         double r = Math.random();
         return (int)(r * maxNumber);
@@ -102,58 +98,54 @@ public class RoulettePlayActivity extends AppCompatActivity {
 
         Log.d("roulette", "getResult : " + angle);
 
-        if (num_roulette == 5) {
-            if (angle > 342 || angle <= 54) { // 11   2
-                text = STRINGS.get(3);
-                buildAlert(text);
-            } else if (angle > 54 && angle <= 126) { // 333   3
-                text = STRINGS.get(2);
-                buildAlert(text);
-            } else if (angle > 126 && angle <= 198) { // 222   4
-                text = STRINGS.get(1);
-                buildAlert(text);
-            } else if (angle > 198 && angle <= 270) { // 111    0
+        if (num_roulette == 2) {
+            if (angle > 90 && angle <= 270)
                 text = STRINGS.get(0);
-                buildAlert(text);
-            } else if (angle > 270 && angle <= 342) { // 22     1
+            else if (angle > 270 || angle <= 90)
+                text = STRINGS.get(1);
+        } else if(num_roulette == 3) {
+            if(angle > 150 && angle <= 270)
+                text = STRINGS.get(0);
+            else if(angle > 30 && angle <= 150)
+                text = STRINGS.get(1);
+            else if(angle > 270 || angle <= 30)
+                text = STRINGS.get(2);
+        } else if(num_roulette == 4) {
+            if(angle > 180 && angle <= 270)
+                text = STRINGS.get(0);
+            else if(angle > 90 && angle <= 180)
+                text = STRINGS.get(1);
+            else if(angle > 0 && angle <= 90)
+                text = STRINGS.get(2);
+            else if (angle > 270 || angle == 0)
+                text = STRINGS.get(3);
+        } else if (num_roulette == 5) {
+            if (angle > 342 || angle <= 54) {
+                text = STRINGS.get(3);
+            } else if (angle > 54 && angle <= 126) {
+                text = STRINGS.get(2);
+            } else if (angle > 126 && angle <= 198) {
+                text = STRINGS.get(1);
+            } else if (angle > 198 && angle <= 270) {
+                text = STRINGS.get(0);
+            } else if (angle > 270 && angle <= 342) {
                 text = STRINGS.get(4);
-                buildAlert(text);
             }
         } else if (num_roulette == 6) {
-            if (angle > 330 || angle <= 30) { // 22
+            if (angle > 330 || angle <= 30) {
                 text = STRINGS.get(4);
-                buildAlert(text);
-            } else if (angle > 30 && angle <= 90) { // 11
+            } else if (angle > 30 && angle <= 90) {
                 text = STRINGS.get(3);
-                buildAlert(text);
-            } else if (angle > 90 && angle <= 150) { // 333
+            } else if (angle > 90 && angle <= 150) {
                 text = STRINGS.get(2);
-                buildAlert(text);
-            } else if (angle > 150 && angle <= 210) { // 222
+            } else if (angle > 150 && angle <= 210) {
                 text = STRINGS.get(1);
-                buildAlert(text);
-            } else if (angle > 210 && angle <= 270) { // 111
+            } else if (angle > 210 && angle <= 270) {
                 text = STRINGS.get(0);
-                buildAlert(text);
-            } else if (angle > 270 && angle <= 330) { // 3
+            } else if (angle > 270 && angle <= 330) {
                 text = STRINGS.get(5);
-                buildAlert(text);
             }
         }
         result.setText("Result : " + text);
-    }
-
-    private void buildAlert(String text) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Congratulations")
-                .setMessage("You have earned " + text + " points!")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        layoutRoulette.setRotation(360 - initAngle);
-                    }
-                });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 }
