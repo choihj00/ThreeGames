@@ -10,13 +10,13 @@
         android:id="@+id/rouletteCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2"
+        android:text="2칸"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintVertical_bias="0.217" />
 
     <Button
         android:id="@+id/decreaseButton"
@@ -40,19 +40,45 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/rouletteCount"
         app:layout_constraintStart_toEndOf="@+id/rouletteCount" />
 
-    <Button
-        android:id="@+id/playRoulette"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="playRoulette"
-        android:text="play"
-        android:textSize="24sp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rouletteCount"
-        app:layout_constraintVertical_bias="0.493" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605">
+
+        <ImageView
+            android:id="@+id/arrow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/baseline_arrow_drop_down" />
+
+        <RelativeLayout
+            android:id="@+id/roulette"
+            android:layout_width="305dp"
+            android:layout_height="305dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_roulette">
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/playRoulette"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:onClick="playRoulette"
+            android:text="play"
+            android:textSize="24sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView5"
@@ -62,8 +88,8 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintVertical_bias="0.125" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
