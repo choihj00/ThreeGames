@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -14,6 +16,8 @@ import java.util.Arrays;
 
 public class random extends AppCompatActivity {
 
+    int ranNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,30 +25,30 @@ public class random extends AppCompatActivity {
 
         Intent intent = getIntent();
         int number = intent.getIntExtra("playNum", 2);
-        int bangNum = intent.getIntExtra("bangNum", 1);
+//        int bangNum = intent.getIntExtra("bangNum", 1);
+        ranNum = (int)(Math.random()*number);
 
-        ArrayList<Integer> ranArray = new ArrayList<>();
+        Button shakeBtn = findViewById(R.id.shakeBtn);
+
+        final Animation animTransShake = AnimationUtils.loadAnimation(
+                this,R.anim.anim_translate_shake);
 
         LinearLayout randomLayout = findViewById(R.id.randomLayout);
 
         randomLayout.setGravity(Gravity.CENTER);
 
-        for(int i=0; i<bangNum; i++){
-            ranArray.add((int)(Math.random()*bangNum));
-            for(int j=0; j<i; j++){
-                if(ranArray.get(i) == ranArray.get(j)){
-                    i--;
-                }
-            }
-        }
-
-//        String a = "";
+//        ArrayList<Integer> ranArray = new ArrayList<>();
 //
-//        for(int i=0; i<ranArray.size(); i++){
-//            a += ranArray.get(i).toString() + " ";
+//        for(int i=0; i<bangNum; i++){
+//            ranArray.add((int)(Math.random()*bangNum));
+//            for(int j=0; j<i; j++){
+//                if(ranArray.get(i) == ranArray.get(j)){
+//                    i--;
+//                }
+//            }
 //        }
-
-        System.out.println(ranArray);
+//
+//        System.out.println(ranArray);
 
         for (int i = 0; i < number; i++) {
             final Button btn = new Button(this);
@@ -61,26 +65,27 @@ public class random extends AppCompatActivity {
             randomLayout.addView(btn);
         }
 
+        shakeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ranNum = (int)(Math.random()*number);
+                randomLayout.startAnimation(animTransShake);
+            }
+        });
+
         for(int i=0; i<number; i++){
             Button rBtn = (Button) randomLayout.getChildAt(i);
             rBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    for(int j=0; j<ranArray.size(); j++){
-                        System.out.println(j);
-                        System.out.println(ranArray.get(j));
-
-                        if(rBtn.getId() == ranArray.get(0)){
-                            rBtn.setBackgroundResource(R.drawable.bang);
-                        } else if(rBtn.getId() == ranArray.get(1)){
+                        if(rBtn.getId() == ranNum){
                             rBtn.setBackgroundResource(R.drawable.bang);
                         } else {
                             rBtn.setBackgroundResource(R.drawable.pass);
                         }
                     }
 
-                }
-            });
+                });
         }
     }
 

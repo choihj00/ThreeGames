@@ -18,7 +18,7 @@ public class LadderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ladder);
 
         final TextView text = findViewById(R.id.ladderNumber);
-        final TextView bangText = findViewById(R.id.bangNum);
+//        final TextView bangText = findViewById(R.id.bangNum);
 
         Button minusBtn = findViewById(R.id.minus);
 
@@ -45,36 +45,36 @@ public class LadderActivity extends AppCompatActivity {
             }
         });
 
-        Button bangMinusBtn = findViewById(R.id.bangMinus);
-        bangMinusBtn.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
-                if(bangNum<2){
-                    Toast.makeText(getApplicationContext(), "최소 1개 폭탄이 있어야 합니다.", Toast.LENGTH_SHORT).show();
-                } else{
-                    bangNum--;
-                }
-                bangText.setText(String.valueOf(bangNum));
-            }
-        });
-
-        Button bangPlusBtn = findViewById(R.id.bangPlus);
-        bangPlusBtn.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
-                if(bangNum>number-2){
-                    Toast.makeText(getApplicationContext(), "불가능합니다.", Toast.LENGTH_SHORT).show();
-                } else{
-                    bangNum++;
-                }
-                bangText.setText(String.valueOf(bangNum));
-            }
-        });
+//        Button bangMinusBtn = findViewById(R.id.bangMinus);
+//        bangMinusBtn.setOnClickListener(new Button.OnClickListener(){
+//            public void onClick(View v){
+//                if(bangNum<2){
+//                    Toast.makeText(getApplicationContext(), "최소 1개 폭탄이 있어야 합니다.", Toast.LENGTH_SHORT).show();
+//                } else{
+//                    bangNum--;
+//                }
+//                bangText.setText(String.valueOf(bangNum));
+//            }
+//        });
+//
+//        Button bangPlusBtn = findViewById(R.id.bangPlus);
+//        bangPlusBtn.setOnClickListener(new Button.OnClickListener(){
+//            public void onClick(View v){
+//                if(bangNum>number-2){
+//                    Toast.makeText(getApplicationContext(), "불가능합니다.", Toast.LENGTH_SHORT).show();
+//                } else{
+//                    bangNum++;
+//                }
+//                bangText.setText(String.valueOf(bangNum));
+//            }
+//        });
     }
     public void onClickLadderPlay(View v){
         Intent intent = new Intent();
         intent.setAction("random");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.putExtra("playNum", number);
-        intent.putExtra("bangNum", bangNum);
+//        intent.putExtra("bangNum", bangNum);
         startActivity(intent);
     }
 }
