@@ -18,7 +18,9 @@ import java.util.ArrayList;
 
 public class CircleManager extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private int[] COLORS = {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA, Color.GRAY};
+    private int[] COLORS = {Color.parseColor("#ffafb0"), Color.parseColor("#aee4ff"),
+            Color.parseColor("#fdfa87"), Color.parseColor("#bee9b4"),
+            Color.parseColor("#ffe4af"), Color.parseColor("#caa6fe")};
     private int num;
     private Context cContext;
     private String className;
