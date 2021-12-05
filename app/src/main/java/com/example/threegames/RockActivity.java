@@ -1,5 +1,6 @@
 package com.example.threegames;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
@@ -23,6 +24,7 @@ public class RockActivity extends AppCompatActivity {
     private TextView result;
     ImageView imageView3;
     ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class RockActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawable.stop();
                 imageView.setVisibility(View.INVISIBLE);
+                imageView3.setVisibility(View.VISIBLE);
                 user = 2;
                 computerhand(computer);
                 checkresult(computer, user);
@@ -94,11 +97,12 @@ public class RockActivity extends AppCompatActivity {
 
     public void checkresult(int computer, int user){
         int results=(3+user-computer)%3;
+        if(user==0&&computer==3)
+            results=1;
 
 
         switch(results){
             case 0:{
-
                 result.setText("무승부");
                 result.setTextColor(Color.BLACK);
                 result.bringToFront();
@@ -119,6 +123,11 @@ public class RockActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    public void onClickHome(View v){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
