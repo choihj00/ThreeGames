@@ -21,7 +21,7 @@ public class CircleManager extends View {
     private int[] COLORS = {Color.parseColor("#ffafb0"), Color.parseColor("#aee4ff"),
             Color.parseColor("#fdfa87"), Color.parseColor("#bee9b4"),
             Color.parseColor("#ffe4af"), Color.parseColor("#caa6fe")};
-    private int num;
+    private int num, done;
     private Context cContext;
     private String className;
     private ArrayList<String> options = null;
@@ -31,11 +31,12 @@ public class CircleManager extends View {
         cContext = context;
         this.num = num;
         this.className = className;
+        done=0;
     }
 
     public void setNum(int num) {
         this.num = num;
-        invalidate();
+//        invalidate();
     }
 
     @Override
@@ -65,6 +66,7 @@ public class CircleManager extends View {
         int temp = 0;
 
         for (int i = 0; i < num; i++) {
+            System.out.println(i);
             paint.setColor(COLORS[i]);
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
             paint.setAntiAlias(true);
@@ -77,31 +79,34 @@ public class CircleManager extends View {
             paint.setTextSize(64);
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-            float arcCenterX = (float) (centerX + (radius * Math.cos(medianAngle))); // Arc's center X
-            float arcCenterY = (float) (centerY + (radius * Math.sin(medianAngle))); // Arc's center Y
+            float arcCenterX = (float) (centerX + (radius * Math.cos(medianAngle)));
+            float arcCenterY = (float) (centerY + (radius * Math.sin(medianAngle)));
 
-            // put text at middle of Arc's center point and Circle's center point
             float textX = (centerX + arcCenterX) / 2;
             float textY = (centerY + arcCenterY) / 2;
+            temp += sweepAngle;
 
             if(className.equals("Roulette")){
-                EditText et = new EditText(cContext);
+                if(done == num)
+                    continue;
+                done++;
+                EditText et = new EditText((RouletteActivity)RouletteActivity.rContext);
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 et.setLayoutParams(lp);
                 et.setText(options.get(i));
                 et.setId(i);
+                System.out.println(et.getId());
                 float x = textX+lp.width*30;
                 float y = textY+lp.height*25;
                 et.setX(x);
                 et.setY(y);
-                ((RelativeLayout)this.getParent()).addView(et);
+                layoutRoulette.addView(et);
             }
             else if(className.equals("RoulettePlay")){
                 canvas.drawText(((RouletteActivity)RouletteActivity.rContext).STRINGS.get(i), textX, textY, paint);
             }
-            temp += sweepAngle;
         }
     }
 }

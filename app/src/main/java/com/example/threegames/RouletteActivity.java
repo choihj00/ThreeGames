@@ -42,7 +42,7 @@ public class RouletteActivity extends AppCompatActivity {
 
         layoutRoulette = (RelativeLayout) findViewById(R.id.roulette);
 
-        STRINGS = setOption(count);
+        STRINGS = setOption(6);
         circleManager = new CircleManager(rContext, count, "Roulette");
         layoutRoulette.addView(circleManager);
     }
@@ -51,10 +51,7 @@ public class RouletteActivity extends AppCompatActivity {
         ArrayList<String> strings = new ArrayList<>();
 
         for (int i = 0; i < num; i++) {
-            if(i<STRINGS.size())
-                strings.add(STRINGS.get(i));
-            else
-                strings.add("옵션"+(i+1));
+            strings.add("옵션"+(i+1));
         }
 
         return strings;
@@ -69,11 +66,13 @@ public class RouletteActivity extends AppCompatActivity {
         for(int i =0;i<count;i++) {
             option = (EditText) findViewById(i);
             STRINGS.set(i, option.getText().toString());
-            layoutRoulette.removeView(findViewById(i));
+//            layoutRoulette.removeView(findViewById(i));
         }
+        layoutRoulette.removeAllViewsInLayout();
+        circleManager = new CircleManager(rContext, count, "Roulette");
+        layoutRoulette.addView(circleManager);
         count++;
         this.rouletteCount.setText(count+"칸");
-        STRINGS = setOption(count);
         circleManager.setNum(count);
     }
 
@@ -86,11 +85,13 @@ public class RouletteActivity extends AppCompatActivity {
         for(int i =0;i<count;i++) {
             option = (EditText) findViewById(i);
             STRINGS.set(i, option.getText().toString());
-            layoutRoulette.removeView(findViewById(i));
+//            layoutRoulette.removeView(option);
         }
+        layoutRoulette.removeAllViewsInLayout();
+        circleManager = new CircleManager(rContext, count, "Roulette");
+        layoutRoulette.addView(circleManager);
         count--;
         this.rouletteCount.setText(count+"칸");
-        STRINGS = setOption(count);
         circleManager.setNum(count);
     }
 
