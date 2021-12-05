@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void onClickRock(View v){
+        Intent intent = new Intent(getApplicationContext(), RockActivity.class);
+        startActivity(intent);
+    }
+
     public void onClickLadder(View v){
         Intent intent = new Intent();
         intent.setAction("ladder");

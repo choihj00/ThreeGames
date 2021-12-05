@@ -47,10 +47,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/rsp"
+        android:id="@+id/rock"
         android:layout_width="210dp"
         android:layout_height="50dp"
         android:layout_marginBottom="207dp"
+        android:onClick="onClickRock"
         android:text="Rock Paper Scissors"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,10 +66,10 @@
         android:layout_marginBottom="10dp"
         android:onClick="onClickRoulette"
         android:text="Roulette Game"
-        app:layout_constraintBottom_toTopOf="@+id/rsp"
-        app:layout_constraintEnd_toEndOf="@+id/rsp"
+        app:layout_constraintBottom_toTopOf="@+id/rock"
+        app:layout_constraintEnd_toEndOf="@+id/rock"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/rsp"
+        app:layout_constraintStart_toStartOf="@+id/rock"
         app:layout_constraintTop_toBottomOf="@+id/ladder" />
 
     <androidx.constraintlayout.widget.Guideline
